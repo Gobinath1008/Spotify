@@ -1,6 +1,6 @@
 /* eslint-disable react-refresh/only-export-components */
-import { createContext, useEffect, useRef, useState } from "react";
-import { songsData } from "../assets/assets";
+import { createContext, useContext, useEffect, useRef, useState } from "react";
+import { SongContext } from "./SongContext";
 
 export const PlayerContext = createContext();
 
@@ -12,7 +12,8 @@ const PlayerContextProvider = (props) => {
     const volBg = useRef();
     const volBar = useRef();
 
-    const [track, setTrack] = useState(songsData[0]);
+    const { songs, addSong, removeSong } = useContext(SongContext);
+  const [track, setTrack] = useState(songs[0]);
     const [playStatus, setPlayStatus] = useState(false);
     const [time, setTime] = useState({
         currentTime: {
@@ -36,7 +37,7 @@ const PlayerContextProvider = (props) => {
     }
 
     const playWithId = async (id) => {
-        await setTrack(songsData[id]);
+        await setTrack(songs[id]);
         setTimeout(() => {
             audioRef.current.play();
             setPlayStatus(true);
@@ -45,7 +46,7 @@ const PlayerContextProvider = (props) => {
 
     const previous = async () => {
         if (track.id > 0) {
-            await setTrack(songsData[track.id - 1]);
+            await setTrack(songs[track.id - 1]);
             setTimeout(() => {
                 audioRef.current.play();
                 setPlayStatus(true);
@@ -54,8 +55,8 @@ const PlayerContextProvider = (props) => {
     }
 
     const next = async () => {
-        if (track.id < songsData.length - 1) {
-            await setTrack(songsData[track.id + 1]);
+        if (track.id < songs.length - 1) {
+            await setTrack(songs[track.id + 1]);
             setTimeout(() => {
                 audioRef.current.play();
                 setPlayStatus(true);

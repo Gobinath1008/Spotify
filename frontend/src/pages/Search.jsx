@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react';
 import { Search as SearchIcon } from 'lucide-react';
-import { songsData } from '../assets/assets';
+import { SongContext } from '../context/SongContext';
 import { PlayerContext } from '../context/PlayerContext';
 import { Play } from 'lucide-react';
 
@@ -21,9 +21,10 @@ const SongItem = ({ name, desc, image, id }) => {
 };
 
 function Search() {
+  const { songs } = useContext(SongContext);
   const [query, setQuery] = useState('');
   
-  const filteredSongs = songsData.filter(song => 
+  const filteredSongs = songs.filter(song => 
     song.name.toLowerCase().includes(query.toLowerCase()) || 
     song.desc.toLowerCase().includes(query.toLowerCase())
   );

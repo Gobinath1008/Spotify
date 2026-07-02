@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { Play } from 'lucide-react';
-import { songsData } from '../assets/assets';
+import { SongContext } from '../context/SongContext';
 import { PlayerContext } from '../context/PlayerContext';
 
 const SongItem = ({ name, desc, image, id }) => {
@@ -20,6 +20,7 @@ const SongItem = ({ name, desc, image, id }) => {
 };
 
 function Library() {
+  const { songs } = useContext(SongContext);
   return (
     <div className="pb-8">
       <div className="flex items-center justify-between mb-6">
@@ -27,7 +28,7 @@ function Library() {
       </div>
       
       <div className="flex flex-col gap-2">
-        {songsData.map((song, index) => (
+        {songs.map((song, index) => (
           <SongItem key={index} name={song.name} desc={song.desc} id={song.id} image={song.image} />
         ))}
       </div>

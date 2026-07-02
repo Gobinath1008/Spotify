@@ -9,6 +9,7 @@ import Library from './pages/Library'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
 import { PlayerContext } from './context/PlayerContext'
+import AdminDashboard from './pages/AdminDashboard'
 
 function App() {
   const { audioRef, track } = useContext(PlayerContext);
@@ -27,6 +28,7 @@ function App() {
                 <Route path="/library" element={<Library />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
+                <Route path="/admin" element={<AdminDashboard />} />
               </Routes>
             </main>
           </div>
@@ -35,7 +37,7 @@ function App() {
         <audio ref={audioRef} src={track.file} preload='auto'></audio>
       </div>
     </Router>
-  )
+  );
 }
 
 export default App

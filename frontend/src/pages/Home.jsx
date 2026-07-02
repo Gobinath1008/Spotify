@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { Play } from 'lucide-react';
-import { songsData } from '../assets/assets';
 import { PlayerContext } from '../context/PlayerContext';
+import { SongContext } from '../context/SongContext';
 
 const SongItem = ({ name, desc, image, id }) => {
   const { playWithId } = useContext(PlayerContext);
@@ -20,15 +20,15 @@ const SongItem = ({ name, desc, image, id }) => {
 };
 
 function Home() {
+  const { songs } = useContext(SongContext);
   return (
     <div className="pb-8">
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-2xl font-bold text-white hover:underline cursor-pointer">Songs</h2>
         <span className="text-spotify-light text-sm font-bold hover:underline cursor-pointer">Show all</span>
       </div>
-      
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
-        {songsData.map((song, index) => (
+        {songs.map((song, index) => (
           <SongItem key={index} name={song.name} desc={song.desc} id={song.id} image={song.image} />
         ))}
       </div>
